@@ -111,11 +111,8 @@ def main() -> None:
                 try:
                     out_files = process_one_xlsx(f.getvalue(), f.name, output_cols)
 
-                    # hogy több excel esetén se írják felül egymást:
-                    stem = Path(f.name).stem
                     for out_name, out_bytes in out_files.items():
-                        z.writestr(f"{stem}/{out_name}", out_bytes)
-
+                        z.writestr(out_name, out_bytes)  # pl. 0801_vevo.csv
                     results.append((f.name, "OK"))
                 except Exception as e:
                     results.append((f.name, f"Hiba: {e}"))
@@ -127,7 +124,7 @@ def main() -> None:
         st.download_button(
             "Letöltés ZIP-ben",
             data=zip_buf.getvalue(),
-            file_name="converted_outputs.zip",
+            file_name="converted.zip",
             mime="application/zip",
         )
 
