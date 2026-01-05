@@ -90,7 +90,7 @@ def process_one_xlsx(
 
 def main() -> None:
     st.set_page_config(page_title="Excel → CSV", layout="centered")
-    st.title("Excel → CSV (Vevő / Szállító)")
+    st.title("Excel → CSV")
 
     output_cols = load_output_cols()
 
