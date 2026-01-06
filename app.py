@@ -1,7 +1,7 @@
 # app.py
 import re
 import zipfile
-from io import BytesIO, StringIO
+from io import BytesIO
 from pathlib import Path
 
 import pandas as pd
@@ -61,9 +61,9 @@ def load_output_cols() -> list[str]:
 
 
 def df_to_csv_bytes(df: pd.DataFrame) -> bytes:
-    s = StringIO()
-    df.to_csv(s, index=False, sep=";", encoding="cp1252")
-    return s.getvalue().encode("utf-8")
+    buffer = BytesIO()
+    df.to_csv(buffer, index=False, sep=";", encoding="cp1252")
+    return buffer.getvalue()
 
 
 def process_one_xlsx(
