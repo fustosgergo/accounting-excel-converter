@@ -62,7 +62,7 @@ def load_output_cols() -> list[str]:
 
 def df_to_csv_bytes(df: pd.DataFrame) -> bytes:
     s = StringIO()
-    df.to_csv(s, index=False, sep=";")
+    df.to_csv(s, index=False, sep=";", encoding="cp1252")
     return s.getvalue().encode("utf-8")
 
 
