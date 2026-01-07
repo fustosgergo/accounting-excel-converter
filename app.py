@@ -61,9 +61,9 @@ def load_output_cols() -> list[str]:
 
 
 def df_to_csv_bytes(df: pd.DataFrame) -> bytes:
-    buffer = BytesIO()
-    df.to_csv(buffer, index=False, sep=";", encoding="utf-8-sig")
-    return buffer.getvalue()
+    s = df.to_csv(index=False, sep=";")
+    s = s.replace("\r\n", "\n").replace("\n", "\r\n")
+    return s.encode("cp1250")
 
 
 def process_one_xlsx(
