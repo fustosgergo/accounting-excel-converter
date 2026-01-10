@@ -82,10 +82,15 @@ def process_one_xlsx(
     vevo_output = build_output(vevo_df, output_cols, datum, biz, mode="vevo")
     szall_output = build_output(szall_df, output_cols, datum, biz, mode="szall")
 
-    return {
-        f"{out_filename}_vevo.csv": df_to_csv_bytes(vevo_output),
-        f"{out_filename}_szall.csv": df_to_csv_bytes(szall_output),
-    }
+    result = {}
+
+    if not vevo_output.empty:
+        result[f"{out_filename}_vevo.csv"] = df_to_csv_bytes(vevo_output)
+
+    if not szall_output.empty:
+        result[f"{out_filename}_szall.csv"] = df_to_csv_bytes(szall_output)
+
+    return result
 
 
 def main() -> None:
